@@ -1,0 +1,41 @@
+using System;
+class Program
+{
+    static void QuickSort(int[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int PivotIndex = Partition(arr, left, right);
+            QuickSort(arr, left, PivotIndex - 1);
+            QuickSort(arr, PivotIndex + 1, right);
+        }
+    }
+    static int Partition(int[] arr, int left, int right)
+    {
+        int pivot = arr[right];
+        int i = left - 1;
+        for (int j = left; j < right; j++)
+        {
+            if (arr[j] <= pivot)
+            {
+                i++;
+                Swap(arr, i, j);
+            }
+        }
+        Swap(arr, i + 1, right);
+        return i + 1;
+    }
+    static void Swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    static void Main()
+    {
+        int[] arr = { 9, 7, 5, 11, 12, 2, 14, 3, 10, 6 };
+        Console.WriteLine("input array: " + string.Join(", ", arr));
+        QuickSort(arr, 0, arr.Length - 1);
+        Console.WriteLine("output array: " + string.Join(", ", arr));
+    }
+}
